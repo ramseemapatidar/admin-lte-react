@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 export const MenuSidebar = () => {
-    const [isSubMenuOpen, setSubMenuOpen] = useState(false);
-    const location = useLocation();
+    const [isOpen, setIsOpen] = useState(false);
 
-    const isToggleActive = location.pathname === '/permissions' || location.pathname === '/roles' || location.pathname === '/users';
-
-    const handleSubMenuToggle = () => {
-        setSubMenuOpen(!isSubMenuOpen);
+    const toggleMenu = () => {
+        setIsOpen(!isOpen);
     };
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
@@ -42,9 +39,8 @@ export const MenuSidebar = () => {
                                         <p>Dashboard</p>
                                     </NavLink>
                                 </li>
-                                <li className="{`nav-item ${isSubMenuOpen ? 'menu-open' : ''} `} nav-item menu-open">
-                                    
-                                    <a className={`nav-link ${isToggleActive ? 'active' : ''}`} onClick={handleSubMenuToggle} >
+                                <li className={`nav-item ${isOpen ? 'menu-open' : ''}`}>
+                                    <a href="#" className="nav-link" onClick={toggleMenu}>
                                         <i className="nav-icon fas fa-tachometer-alt"></i>
                                         <p>
                                             User Management
