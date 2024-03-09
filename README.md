@@ -11,6 +11,9 @@ npm create vite@latest
 
 npm install admin-lte@^3.1 --save
 
+other packege
+
+npm install react-router-dom
 
 3. After installing Admin LTE, set up the startup page by navigating to the src/app.css file and pasting the CSS code provided by AdminLTE.
 

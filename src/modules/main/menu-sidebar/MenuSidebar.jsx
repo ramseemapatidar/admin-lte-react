@@ -1,6 +1,14 @@
-import React from 'react'
-
+import { useState } from "react";
+import { NavLink, useLocation } from "react-router-dom"
 export const MenuSidebar = () => {
+    const [isSubMenuOpen, setSubMenuOpen] = useState(false);
+    const location = useLocation();
+
+    const isToggleActive = location.pathname === '/permissions' || location.pathname === '/roles' || location.pathname === '/users';
+
+    const handleSubMenuToggle = () => {
+        setSubMenuOpen(!isSubMenuOpen);
+    };
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
                     <a href="index3.html" className="brand-link">
@@ -17,50 +25,54 @@ export const MenuSidebar = () => {
                             </div>
                         </div>
                         <div className="form-inline">
-                            <div className="input-group" data-widget="sidebar-search">
+                            {/* <div className="input-group" data-widget="sidebar-search">
                                 <input className="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" />
                                 <div className="input-group-append">
                                     <button className="btn btn-sidebar">
                                         <i className="fas fa-search fa-fw"></i>
                                     </button>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <nav className="mt-2">
                             <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
-                                <li className="nav-item menu-open">
-                                    <a href="#" className="nav-link active">
+                            <li className="nav-item">
+                                    <NavLink to="/" className="nav-link">
+                                        <i className="nav-icon fas fa-th"></i>
+                                        <p>Dashboard</p>
+                                    </NavLink>
+                                </li>
+                                <li className="{`nav-item ${isSubMenuOpen ? 'menu-open' : ''} `} nav-item menu-open">
+                                    
+                                    <a className={`nav-link ${isToggleActive ? 'active' : ''}`} onClick={handleSubMenuToggle} >
                                         <i className="nav-icon fas fa-tachometer-alt"></i>
                                         <p>
-                                            Starter Pages
+                                            User Management
                                             <i className="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
                                     <ul className="nav nav-treeview">
                                         <li className="nav-item">
-                                            <a href="#" className="nav-link active">
+                                            <NavLink to="/permissions" className="nav-link">
                                                 <i className="far fa-circle nav-icon"></i>
-                                                <p>Active Page</p>
-                                            </a>
+                                                <p>Permissions</p>
+                                            </NavLink>
                                         </li>
                                         <li className="nav-item">
-                                            <a href="#" className="nav-link">
+                                            <NavLink to="/roles" className="nav-link">
                                                 <i className="far fa-circle nav-icon"></i>
-                                                <p>Inactive Page</p>
-                                            </a>
+                                                <p>Roles</p>
+                                            </NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink to="/users" className="nav-link">
+                                                <i className="far fa-circle nav-icon"></i>
+                                                <p>Users</p>
+                                            </NavLink>
                                         </li>
                                     </ul>
                                 </li>
-                                <li className="nav-item">
-                                    <a href="#" className="nav-link">
-                                        <i className="nav-icon fas fa-th"></i>
-                                        <p>
-                                            Simple Link
-                                            <span className="right badge badge-danger">New</span>
-                                        </p>
-                                    </a>
-                                </li>
+                                
                             </ul>
                         </nav>
                     </div>
