@@ -2,9 +2,16 @@ import { Outlet } from 'react-router-dom';
 import { Header } from '@modules/main/header/Header';
 import { MenuSidebar } from '@modules/main/menu-sidebar/MenuSidebar';
 import { Footer } from '@modules/main/footer/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleSidebarMenu } from '../../store/reducers/ui';
 
 
 export const Main = () => {
+    const dispatch = useDispatch();
+
+    const handleToggleMenuSidebar = () => {
+        dispatch(toggleSidebarMenu());
+      };
   return (
     <>
      <div className="wrapper">
@@ -34,6 +41,11 @@ export const Main = () => {
                 </div>
                 
                 <Footer/>
+                <div
+          id="sidebar-overlay"
+          role="presentation"
+          onClick={handleToggleMenuSidebar}
+        />
             </div>
     </>
   )

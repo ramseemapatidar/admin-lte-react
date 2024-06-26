@@ -1,11 +1,43 @@
-import React from 'react'
+import React,{ useEffect } from 'react'
+import { addWindowClass, removeWindowClass, sleep } from '../../../utils/helpers';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleSidebarMenu } from '../../../store/reducers/ui';
 
 export const Header = () => {
+    const dispatch = useDispatch();
+    const screenSize = useSelector((state) => state.ui.screenSize);
+    const menuSidebarCollapsed = useSelector((state) => state.ui.menuSidebarCollapsed);
+    const handleToggleMenuSidebar = () => {
+        dispatch(toggleSidebarMenu());
+    };
+
+    useEffect(() => {
+        addWindowClass('sidebar-mini');
+        return () => {
+          removeWindowClass('sidebar-mini');
+        };
+      }, []);
+    
+      useEffect(() => {
+        removeWindowClass('sidebar-closed');
+        removeWindowClass('sidebar-collapse');
+        removeWindowClass('sidebar-open');
+        if (menuSidebarCollapsed && screenSize === 'lg') {
+          addWindowClass('sidebar-collapse');
+        } else if (menuSidebarCollapsed && screenSize === 'xs') {
+          addWindowClass('sidebar-open');
+        } else if (!menuSidebarCollapsed && screenSize !== 'lg') {
+          addWindowClass('sidebar-closed');
+          addWindowClass('sidebar-collapse');
+        }
+      }, [screenSize, menuSidebarCollapsed]);
+
     return (
         <nav className="main-header navbar navbar-expand navbar-white navbar-light">
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <a className="nav-link" data-widget="pushmenu" href="#" role="button"><i className="fas fa-bars"></i></a>
+                    <a className="nav-link" onClick={handleToggleMenuSidebar}><i className="fas fa-bars"></i></a>
                 </li>
                 <li className="nav-item d-none d-sm-inline-block">
                     <a href="index3.html" className="nav-link">Home</a>
