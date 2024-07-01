@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { calculateWindowSize } from '../../utils/helpers';
+import { addWindowClass, calculateWindowSize,removeWindowClass } from '../../utils/helpers';
 import {
   NAVBAR_DARK_VARIANTS,
   NAVBAR_LIGHT_VARIANTS,
@@ -22,6 +22,8 @@ const initialState = {
   menuChildIndent: false,
   layoutFixed: false,
   topNavigation: false,
+  navbarSearch :false,
+  messageDropdown:false,
 };
 
 export const uiSlice = createSlice({
@@ -93,6 +95,16 @@ export const uiSlice = createSlice({
     setWindowSize: (state, { payload }) => {
       state.screenSize = payload;
     },
+
+    toggleNavbarSearch : (state)=>{
+      state.navbarSearch = !state.navbarSearch;
+    },
+
+    toggleMessageDropdown:(state)=>{
+      state.messageDropdown = !state.messageDropdown;
+      console.log(state.messageDropdown)
+    },
+    
   },
 });
 
@@ -112,6 +124,8 @@ export const {
   toggleLayoutFixed,
   setSidebarMenuToggle,
   toggleTopNavigation,
+  toggleNavbarSearch,
+  toggleMessageDropdown,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

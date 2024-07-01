@@ -2,15 +2,21 @@ import React,{ useEffect } from 'react'
 import { addWindowClass, removeWindowClass, sleep } from '../../../utils/helpers';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleSidebarMenu } from '../../../store/reducers/ui';
-
+import { toggleSidebarMenu, toggleNavbarSearch} from '../../../store/reducers/ui';
+import { MessagesDropdown } from './messages-dropdown/MessagesDropdown'
 export const Header = () => {
     const dispatch = useDispatch();
     const screenSize = useSelector((state) => state.ui.screenSize);
     const menuSidebarCollapsed = useSelector((state) => state.ui.menuSidebarCollapsed);
+    const navbarSearch = useSelector((state) => state.ui.navbarSearch);
+
     const handleToggleMenuSidebar = () => {
         dispatch(toggleSidebarMenu());
     };
+
+    const handelNavbarSearch =()=>{
+        dispatch(toggleNavbarSearch())
+    }
 
     useEffect(() => {
         addWindowClass('sidebar-mini');
@@ -32,7 +38,7 @@ export const Header = () => {
           addWindowClass('sidebar-collapse');
         }
       }, [screenSize, menuSidebarCollapsed]);
-
+      
     return (
         <nav className="main-header navbar navbar-expand navbar-white navbar-light">
             <ul className="navbar-nav">
@@ -48,18 +54,18 @@ export const Header = () => {
             </ul>
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                    <a className="nav-link" data-widget="navbar-search" href="#" role="button">
+                    <a className="nav-link" onClick={handelNavbarSearch}>
                         <i className="fas fa-search"></i>
                     </a>
-                    <div className="navbar-search-block">
+                    <div className={`navbar-search-block ${navbarSearch ? 'navbar-search-open' : ''}`} >
                         <form className="form-inline">
                             <div className="input-group input-group-sm">
                                 <input className="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" />
                                 <div className="input-group-append">
-                                    <button className="btn btn-navbar" type="submit">
+                                    <button className="btn btn-navbar" type="button">
                                         <i className="fas fa-search"></i>
                                     </button>
-                                    <button className="btn btn-navbar" type="button" data-widget="navbar-search">
+                                    <button className="btn btn-navbar" type="button" data-widget="navbar-search" onClick={handelNavbarSearch}>
                                         <i className="fas fa-times"></i>
                                     </button>
                                 </div>
@@ -67,18 +73,19 @@ export const Header = () => {
                         </form>
                     </div>
                 </li>
-                <li className="nav-item dropdown">
-                    <a className="nav-link" data-toggle="dropdown" href="#">
+                <MessagesDropdown/>
+                {/* <li className={`nav-item dropdown ${messageDropdown ? 'show' :''}`} >
+                    <a className="nav-link" onClick={handeltoggleMessageDropdown}>
                         <i className="far fa-comments"></i>
                         <span className="badge badge-danger navbar-badge">3</span>
                     </a>
-                    <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <div className={`dropdown-menu dropdown-menu-lg dropdown-menu-right ${messageDropdown ? 'show' :''}`}>
                         <a href="#" className="dropdown-item">
                             <div className="media">
                                 <img src="dist/img/user1-128x128.jpg" alt="User Avatar" className="img-size-50 mr-3 img-circle" />
                                 <div className="media-body">
                                     <h3 className="dropdown-item-title">
-                                        Brad Diesel
+                                        Brad Diesel 
                                         <span className="float-right text-sm text-danger"><i className="fas fa-star"></i></span>
                                     </h3>
                                     <p className="text-sm">Call me whenever you can...</p>
@@ -117,13 +124,14 @@ export const Header = () => {
                         <div className="dropdown-divider"></div>
                         <a href="#" className="dropdown-item dropdown-footer">See All Messages</a>
                     </div>
-                </li>
-                <li className="nav-item dropdown">
-                    <a className="nav-link" data-toggle="dropdown" href="#">
+                </li> */}
+                <li className={`nav-item dropdown ${messageDropdown ? 'show' :''}`}>
+                    
+                    <a className="nav-link" data-toggle="dropdown" onClick={handeltoggleMessageDropdown}>
                         <i className="far fa-bell"></i>
                         <span className="badge badge-warning navbar-badge">15</span>
                     </a>
-                    <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <div className={`dropdown-menu dropdown-menu-lg dropdown-menu-right ${messageDropdown ? 'show' :''}`}>
                         <span className="dropdown-header">15 Notifications</span>
                         <div className="dropdown-divider"></div>
                         <a href="#" className="dropdown-item">
