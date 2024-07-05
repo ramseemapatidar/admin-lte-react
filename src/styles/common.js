@@ -20,3 +20,12 @@ export const StyledDropdown = styled(Dropdown)`
     margin: 0;
   }
 `;
+export const StyledSmallUserImage = styled(Image)`
+  margin-top: 3px;
+  --pf-box-shadow: 0 3px 6px #00000029, 0 3px 6px #0000003b !important;
+`;
+
+export const StyledBigUserImage = styled(Image)`
+  --pf-box-shadow: 0 3px 6px #00000029, 0 3px 6px #0000003b !important;
+  --pf-border: 3px solid #fff3;
+`;

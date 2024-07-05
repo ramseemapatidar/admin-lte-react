@@ -1,9 +1,9 @@
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
-import { Main } from './modules/main/Main';
-import { Dashboard } from './pages/dashboard/Dashboard';
-import { PermissionList } from './pages/permissions/PermissionList';
-import { RoleList } from './pages/roles/RoleList';
-import { UserList } from './pages/users/UserList';
+import { Main } from '@app/modules/main/Main';
+import { Dashboard } from '@pages/dashboard/Dashboard';
+import { PermissionList } from '@pages/permissions/PermissionList';
+import { RoleList } from '@pages/roles/RoleList';
+import { UserList } from '@pages/users/UserList';
 
 
 
