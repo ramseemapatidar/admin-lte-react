@@ -4,3 +4,38 @@
 @import 'admin-lte/plugins/fontawesome-free/css/all.min.css';
 @import 'admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
 @import '../node_modules/admin-lte/dist/css/adminlte.min.css';
+
+@import 'react-toastify/dist/ReactToastify.min.css';
+
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.main-header .navbar-nav .nav-item .nav-link {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Blank Page Stayle*/
+
+.user-card {
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.user-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.user-img img {
+  width: 100%;
+  height: auto;
+}

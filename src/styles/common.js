@@ -1,5 +1,25 @@
-import { styled } from "styled-components";
-import { Dropdown,Image } from "@profabric/react-components";
+import styled from 'styled-components';
+import {
+  Dropdown,
+  Image,
+  Button as RawButton,
+  Checkbox as RawCheckbox,
+  Select as RawSelect,
+} from '@profabric/react-components';
+
+export const Button = styled(RawButton)`
+  --pf-display: block;
+  --pf-width: 100%;
+`;
+
+export const Select = styled(RawSelect)`
+  --pf-width: 100%;
+  --pf-display: block;
+`;
+
+export const Checkbox = styled(RawCheckbox)`
+  --pf-display: block;
+`;
 
 export const StyledDropdown = styled(Dropdown)`
   border: none;
@@ -20,6 +40,7 @@ export const StyledDropdown = styled(Dropdown)`
     margin: 0;
   }
 `;
+
 export const StyledSmallUserImage = styled(Image)`
   margin-top: 3px;
   --pf-box-shadow: 0 3px 6px #00000029, 0 3px 6px #0000003b !important;
