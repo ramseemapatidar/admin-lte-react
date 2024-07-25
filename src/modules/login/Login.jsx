@@ -27,7 +27,7 @@ export const Login = () => {
   const login = async (username, password) => {
     try {
       setAuthLoading(true);
-      const response = await authLogin(email, password);
+      const response = await authLogin(username, password);
       dispatch(setAuthentication(response));
       toast.success('Login is succeed!');
       setAuthLoading(false);

@@ -1,96 +1,96 @@
 {
     "login": {
       "label": {
-        "signIn": "Sign in to start your session",
-        "rememberMe": "Remember Me",
-        "forgotPass": "I forgot my password",
-        "registerNew": "Register a new membership"
+        "signIn": "अपने सत्र को शुरू करने के लिए साइन इन करें",
+        "rememberMe": "मुझे याद रखें",
+        "forgotPass": "मैंने अपना पासवर्ड भूल गया",
+        "registerNew": "एक नई सदस्यता रजिस्टर करें"
       },
       "button": {
         "signIn": {
-          "label": "Sign In",
-          "social": "Sign in using {{what}}"
+          "label": "साइन इन करें",
+          "social": "{{what}} का उपयोग करके साइन इन करें"
         },
         "signUp": {
-          "label": "Sign Up",
-          "social": "Sign up using {{what}}"
+          "label": "साइन अप करें",
+          "social": "{{what}} का उपयोग करके साइन अप करें"
         },
-        "signOut": "Sign Out"
+        "signOut": "साइन आउट"
       }
     },
     "register": {
-      "alreadyHave": "I already have a membership",
-      "registerNew": "Register a new membership",
-      "label": "Register"
+      "alreadyHave": "मेरे पास पहले से ही एक सदस्यता है",
+      "registerNew": "एक नई सदस्यता रजिस्टर करें",
+      "label": "रजिस्टर"
     },
     "recover": {
-      "forgotYourPassword": "You forgot your password? Here you can easily retrieve a new password.",
-      "oneStepAway": "You are only one step a way from your new password, recover your password now.",
-      "changePassword": "Change Password",
-      "requestNewPassword": "Request New Password"
+      "forgotYourPassword": "क्या आपने अपना पासवर्ड भूल गए? यहाँ आप आसानी से नया पासवर्ड प्राप्त कर सकते हैं।",
+      "oneStepAway": "आप अपने नए पासवर्ड से केवल एक कदम दूर हैं, अब अपना पासवर्ड रिकवर करें।",
+      "changePassword": "पासवर्ड बदलें",
+      "requestNewPassword": "नया पासवर्ड अनुरोध करें"
     },
     "main": {
       "label": {
-        "moreInfo": "More info",
-        "follow": "Follow",
-        "aboutMe": "About Me",
-        "education": "Education",
-        "location": "Location",
-        "skills": "Skills",
-        "notes": "Notes",
-        "activity": "Activity",
-        "timeline": "Timeline",
-        "settings": "Settings"
+        "moreInfo": "अधिक जानकारी",
+        "follow": "फॉलो करें",
+        "aboutMe": "मेरे बारे में",
+        "education": "शिक्षा",
+        "location": "स्थान",
+        "skills": "कौशल",
+        "notes": "नोट्स",
+        "activity": "गतिविधि",
+        "timeline": "समयरेखा",
+        "settings": "सेटिंग्स"
       }
     },
     "header": {
       "label": {
-        "home": "Home",
-        "contact": "Contact"
+        "home": "मुख्य पृष्ठ",
+        "contact": "संपर्क करें"
       },
       "language": {
-        "turkish": "Turkish",
-        "english": "English",
-        "hindi" : "Hindi",
-        "german": "German",
-        "french": "French",
-        "spanish": "Spanish"
+        "turkish": "तुर्की",
+        "english": "अंग्रेज़ी",
+        "hindi": "हिंदी",
+        "german": "जर्मन",
+        "french": "फ्रेंच",
+        "spanish": "स्पैनिश"
       },
       "messages": {
-        "ago": "{{quantity}} {{unit}} Ago",
-        "seeAll": "See All Messages"
+        "ago": "{{quantity}} {{unit}} पहले",
+        "seeAll": "सभी संदेश देखें"
       },
       "notifications": {
-        "count": "{{quantity}} Notifications",
-        "newMessagesCount": "{{quantity}} new messages",
-        "friendRequestsCount": "{{quantity}} friend requests",
-        "reportsCount": "{{quantity}} new reports",
-        "seeAll": "See All Notifications"
+        "count": "{{quantity}} सूचनाएँ",
+        "newMessagesCount": "{{quantity}} नए संदेश",
+        "friendRequestsCount": "{{quantity}} मित्र अनुरोध",
+        "reportsCount": "{{quantity}} नई रिपोर्ट",
+        "seeAll": "सभी सूचनाएँ देखें"
       },
       "user": {
-        "profile": "Profile",
-        "followers": "Followers",
-        "sales": "Sales",
-        "friends": "Friends"
+        "profile": "प्रोफ़ाइल",
+        "followers": "अनुयायी",
+        "sales": "बिक्री",
+        "friends": "मित्र"
       }
     },
     "menusidebar": {
       "label": {
-        "dashboard": "Dashboard",
-        "profile": "Profile",
-        "blank": "Blank",
-        "mainMenu": "Main Menu",
-        "subMenu": "Sub Menu"
+        "dashboard": "डैशबोर्ड",
+        "profile": "प्रोफ़ाइल",
+        "blank": "खाली",
+        "mainMenu": "मुख्य मेनू",
+        "subMenu": "उप मेनू"
       }
     },
     "footer": {
-      "version": "Version",
-      "copyright": "All rights reserved."
+      "version": "संस्करण",
+      "copyright": "सर्वाधिकार सुरक्षित।"
     },
     "views": {
       "user": {
-        "profile": "User Profile",
-        "following": "Following"
+        "profile": "उपयोगकर्ता प्रोफ़ाइल",
+        "following": "अनुसरण कर रहा है"
       }
     },
     "measurement": {
