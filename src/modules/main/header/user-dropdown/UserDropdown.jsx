@@ -1,6 +1,8 @@
 import React ,{ useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { setAuthentication } from '@app/store/reducers/auth';
 import { StyledBigUserImage, StyledSmallUserImage } from '../../../../styles/common'
 import { 
     UserBody,
@@ -10,7 +12,26 @@ import {
 } from '../../../../styles/dropdown-menus'
 
 export const UserDropdown = () => {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+  const [t] = useTranslation();
+  const dispatch = useDispatch();
+  const authentication = useSelector((state) => state.auth.authentication);
+  
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const logOut = async (event) => {
+    event.preventDefault();
+    setDropdownOpen(false);
+    dispatch(setAuthentication(undefined));
+    navigate('/login');
+    localStorage.removeItem('authentication');
+  };
+
+  const navigateToProfile = (event) => {
+    event.preventDefault();
+    setDropdownOpen(false);
+    navigate('/profile');
+  };
 
   return (
     <UserMenuDropdown isOpen={dropdownOpen} hideArrow>
@@ -66,9 +87,9 @@ export const UserDropdown = () => {
           <button
             type="button"
             className="btn btn-default btn-flat float-right"
-           
+            onClick={logOut}
           >
-            logout
+            {t('login.button.signOut')}
           </button>
         </UserFooter>
       </div>

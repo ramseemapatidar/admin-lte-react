@@ -26,6 +26,7 @@ export const Header = () => {
 
     useEffect(() => {
         addWindowClass('sidebar-mini');
+        removeWindowClass('login-page');
         return () => {
           removeWindowClass('sidebar-mini');
         };

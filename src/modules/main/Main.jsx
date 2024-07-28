@@ -1,3 +1,4 @@
+import React, { useEffect,useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from '@modules/main/header/Header';
 import { MenuSidebar } from '@modules/main/menu-sidebar/MenuSidebar';
@@ -8,10 +9,18 @@ import { toggleSidebarMenu } from '../../store/reducers/ui';
 
 export const Main = () => {
     const dispatch = useDispatch();
+    const [isAppLoaded, setIsAppLoaded] = useState(false);
 
     const handleToggleMenuSidebar = () => {
         dispatch(toggleSidebarMenu());
       };
+
+      const authentication = useSelector((state) => state.auth.authentication);
+      useEffect(() => {
+        console.log(authentication);
+          setIsAppLoaded(authentication);
+        }, [authentication]);
+      
   return (
     <>
      <div className="wrapper">

@@ -18,7 +18,7 @@ import { Button } from '@app/styles/common';
 export const Login = () => {
 
   const [isAuthLoading, setAuthLoading] = useState(false);
-
+console.log(isAuthLoading);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
