@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 export const MenuSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-
+  const authentication = useSelector((state) => state.auth.authentication);
+console.log('ram',authentication);
   // Determine if the User Management menu should be open based on the current path
   useEffect(() => {
     if (location.pathname.startsWith("/permissions") || location.pathname.startsWith("/roles") || location.pathname.startsWith("/users")) {
@@ -30,7 +32,7 @@ export const MenuSidebar = () => {
             <img src="https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User Image" />
           </div>
           <div className="info">
-            <a href="#" className="d-block">Alexander Pierce</a>
+            <a href="#" className="d-block">{authentication.tokenInfo.expires_in}</a>
           </div>
         </div>
         <nav className="mt-2">

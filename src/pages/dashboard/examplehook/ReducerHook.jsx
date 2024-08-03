@@ -6,7 +6,6 @@ export const ReducerHook = () => {
   const initialState = { count : 0 }
 
   const upDown = (state,action) =>{
-    console.log(state);
     switch(action.type){
       case 'increment':
       return {count : state.count+1 }

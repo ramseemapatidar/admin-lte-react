@@ -11,32 +11,16 @@ import { PermissionList } from '@pages/permissions/PermissionList';
 import { RoleList } from '@pages/roles/RoleList';
 import { UserList } from '@pages/users/UserList';
 import { useDispatch } from 'react-redux';
-import { getAuthStatus } from './service/authuser';
-import { setAuthentication } from './store/reducers/auth';
+import { checkSession } from './service/authuser';
 function App() {
   const [isAppLoading, setIsAppLoading] = useState(true);
   const dispatch = useDispatch();
-  const checkSession = async () => {
-    try {
-      let responses = await Promise.all([
-       
-       
-        getAuthStatus(),
-      ]);
-
-      responses = responses.filter((r) => r);
-
-      if (responses && responses.length > 0) {
-        dispatch(setAuthentication(responses[0]));
-      }
-    } catch (error) {
-      console.log('error', error);
-    }
-    setIsAppLoading(false);
-  };
+  
+  
 
   useEffect(() => {
-    checkSession();
+    checkSession(dispatch,setIsAppLoading);
+
   }, []);
   if (isAppLoading) {
     return <p>Loading</p>;

@@ -13,7 +13,6 @@ export const RefHook = () => {
     }
 
     const stopTimer = () => {
-        console.log(timerRef.current);
         clearInterval(timerRef.current)
     }
 

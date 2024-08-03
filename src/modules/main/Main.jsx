@@ -17,7 +17,6 @@ export const Main = () => {
 
       const authentication = useSelector((state) => state.auth.authentication);
       useEffect(() => {
-        console.log(authentication);
           setIsAppLoaded(authentication);
         }, [authentication]);
       

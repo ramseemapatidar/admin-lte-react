@@ -102,7 +102,6 @@ export const uiSlice = createSlice({
 
     toggleMessageDropdown:(state)=>{
       state.messageDropdown = !state.messageDropdown;
-      console.log(state.messageDropdown)
     },
     
   },

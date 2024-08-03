@@ -24,18 +24,18 @@ console.log(isAuthLoading);
   const navigate = useNavigate();
   const [t] = useTranslation();
 
-  const login = async (username, password) => {
+  const login = async (email, password) => {
     try {
       setAuthLoading(true);
-      const response = await authLogin(username, password);
-      dispatch(setAuthentication(response));
+      const response = await authLogin(email, password);
+      console.log('login response',{tokenInfo:response});
+      dispatch(setAuthentication({tokenInfo:response}));
       toast.success('Login is succeed!');
       setAuthLoading(false);
       navigate('/');
     } catch (error) {
-      console.log(error)
       setAuthLoading(false);
-      toast.error(error.response.message || 'Failed');
+      toast.error(error.response.data.message || 'Failed');
     }
   };
 
@@ -43,18 +43,18 @@ console.log(isAuthLoading);
 
   const { handleChange, values, handleSubmit, touched, errors } = useFormik({
     initialValues: {
-      username: '',
+      email: '',
       password: '',
     },
     validationSchema: Yup.object({
-      username: Yup.string().required('Required'),
+      email: Yup.string().required('Required'),
       password: Yup.string()
         .min(5, 'Must be 5 characters or more')
         .max(30, 'Must be 30 characters or less')
         .required('Required'),
     }),
     onSubmit: (values) => {
-      login(values.username, values.password);
+      login(values.email, values.password);
     },
   });
 
@@ -74,18 +74,18 @@ console.log(isAuthLoading);
           <div className="mb-3">
             <InputGroup className="mb-3">
               <Form.Control
-                id="username"
-                name="username"
-                type="username"
-                placeholder="username"
+                id="email"
+                name="email"
+                type="email"
+                placeholder="email"
                 onChange={handleChange}
-                value={values.username}
-                isValid={touched.username && !errors.username}
-                isInvalid={touched.username && !!errors.username}
+                value={values.email}
+                isValid={touched.email && !errors.email}
+                isInvalid={touched.email && !!errors.email}
               />
-              {touched.username && errors.username ? (
+              {touched.email && errors.email ? (
                 <Form.Control.Feedback type="invalid">
-                  {errors.username}
+                  {errors.email}
                 </Form.Control.Feedback>
               ) : (
                   <InputGroup.Text>

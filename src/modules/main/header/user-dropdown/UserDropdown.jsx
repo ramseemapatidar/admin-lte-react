@@ -10,6 +10,9 @@ import {
     UserHeader,
     UserMenuDropdown 
 } from '../../../../styles/dropdown-menus'
+import { toast } from 'react-toastify';
+import { logoutUser } from '../../../../service/authuser';
+
 
 export const UserDropdown = () => {
   const navigate = useNavigate();
@@ -25,6 +28,19 @@ export const UserDropdown = () => {
     dispatch(setAuthentication(undefined));
     navigate('/login');
     localStorage.removeItem('authentication');
+
+    
+    // try {
+    //  const response = await logoutUser();
+    //   setDropdownOpen(false);
+    //   dispatch(setAuthentication(undefined));
+    //   toast.success('Logout is succeed!');
+    //   navigate('/login');
+    //   localStorage.removeItem('authentication');
+    // } catch (error) {
+    //   toast.error('Failed');
+    // }
+    
   };
 
   const navigateToProfile = (event) => {
@@ -54,7 +70,7 @@ export const UserDropdown = () => {
             height={90}
             rounded
           />
-          <p>ram@imast.in
+          <p>rrrrr
             <small>
               <span>Member since </span>
               <span>
