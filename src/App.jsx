@@ -12,6 +12,7 @@ import { RoleList } from '@pages/roles/RoleList';
 import { UserList } from '@pages/users/UserList';
 import { useDispatch } from 'react-redux';
 import { checkSession } from './service/authuser';
+import { Profile } from '@pages/profile/Profile';
 function App() {
   const [isAppLoading, setIsAppLoading] = useState(true);
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
           <Route path="/" element={<PrivateRoute />}> 
             <Route path="/" element={<Main />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/permissions" element={<PermissionList />} />
               <Route path="/roles" element={<RoleList />} />
               <Route path="/users" element={<UserList />} />

@@ -37,3 +37,7 @@ export const sleep = (time) =>
     }
   };
   
+  export const capitalize = (str) => {
+    if (!str) return '';
+    return str.replace(/\b\w/g, char => char.toUpperCase());
+  };

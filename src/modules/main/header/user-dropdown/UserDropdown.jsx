@@ -23,23 +23,17 @@ export const UserDropdown = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const logOut = async (event) => {
-    event.preventDefault();
-    setDropdownOpen(false);
-    dispatch(setAuthentication(undefined));
-    navigate('/login');
-    localStorage.removeItem('authentication');
-
-    
-    // try {
-    //  const response = await logoutUser();
-    //   setDropdownOpen(false);
-    //   dispatch(setAuthentication(undefined));
-    //   toast.success('Logout is succeed!');
-    //   navigate('/login');
-    //   localStorage.removeItem('authentication');
-    // } catch (error) {
-    //   toast.error('Failed');
-    // }
+    event.preventDefault();    
+    try {
+     const response = await logoutUser();
+      setDropdownOpen(false);
+      dispatch(setAuthentication(undefined));
+      toast.success('Logout is succeed!');
+      navigate('/login');
+      localStorage.removeItem('authentication');
+    } catch (error) {
+      toast.error(error.response.data.message || 'Failed');
+    }
     
   };
 
@@ -93,13 +87,12 @@ export const UserDropdown = () => {
           </div>
         </UserBody>
         <UserFooter>
-          <button
+          <Link to = "/profile"
             type="button"
             className="btn btn-default btn-flat"
-           
           >
             profile
-          </button>
+          </Link>
           <button
             type="button"
             className="btn btn-default btn-flat float-right"

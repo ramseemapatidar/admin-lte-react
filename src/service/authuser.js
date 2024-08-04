@@ -5,18 +5,11 @@ import { setAuthentication } from '../store/reducers/auth';
 export const authLogin = async (email, password) => {
   try {
     const response = await axios.post(`${config.API_URL}/login`, { email, password });
-
-    if (response.data.success) {
+    if (response.data.status=='success') {
       const data = response.data.data;
-      const token = data.access_token;
-      const user = 'ram'; // Assuming user info is returned
-
-      // Store token and user info in local storage
-      localStorage.setItem('authentication', JSON.stringify({ tokenInfo: data}));
-      //localStorage.setItem('authentication', response.data.data);
-      // Return the token and user info
+      localStorage.setItem('authentication', JSON.stringify({ userInfo: data}));
       return data;
-    } 
+    }
   } catch (error) {
     throw error;
   }
@@ -53,23 +46,57 @@ export const checkSession = async (dispatch, setIsAppLoading) => {
 export const logoutUser = async () => {
   try {
     const auth = JSON.parse(localStorage.getItem('authentication'));
-    console.log(auth)
-    const token = auth?.profile?.access_token;
-    if (!token) {
-      throw new Error('No token found');
+    
+    const token = auth.userInfo.token.access_token;
+    const response = await axios.post(`${config.API_URL}/logout`, null, {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        },
+                    });
+                    console.log(response);
+    if (response.data.status=='success') {
+      const data = response.data.data;
+      return data;
     }
 
-    await axios.post(`${config.API_URL}/logout`, null, {
+  } catch (error) {
+    throw error
+  }
+};
+  
+export const getUserProfile = async () => {
+  try {
+    const auth = JSON.parse(localStorage.getItem('authentication'));
+    if (!auth) throw new Error('No authentication data found');
+
+    const token = auth.userInfo.token.access_token;
+    const response = await axios.post(`${config.API_URL}/profile`, null, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    // Remove the JWT token from localStorage
-
-    return true;
+    if (response.data.status === 'success') {
+      const data = response.data.data;
+      return data;
+    } else {
+      throw new Error('Failed to fetch user profile');
+    }
   } catch (error) {
-    console.error('Logout failed:', error);
+    throw error;
   }
 };
-  
+
+export const updateUserProfile = async (formData) => {
+  try {
+    const response = await axios.post(`${config.API_URL}/update-profile`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('authentication')).userInfo.token.access_token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

@@ -18,7 +18,6 @@ import { Button } from '@app/styles/common';
 export const Login = () => {
 
   const [isAuthLoading, setAuthLoading] = useState(false);
-console.log(isAuthLoading);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -28,8 +27,7 @@ console.log(isAuthLoading);
     try {
       setAuthLoading(true);
       const response = await authLogin(email, password);
-      console.log('login response',{tokenInfo:response});
-      dispatch(setAuthentication({tokenInfo:response}));
+      dispatch(setAuthentication({userInfo:response}));
       toast.success('Login is succeed!');
       setAuthLoading(false);
       navigate('/');
