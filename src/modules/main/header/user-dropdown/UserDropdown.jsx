@@ -2,7 +2,6 @@ import React ,{ useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { setAuthentication } from '@app/store/reducers/auth';
 import { StyledBigUserImage, StyledSmallUserImage } from '../../../../styles/common'
 import { 
     UserBody,
@@ -11,30 +10,27 @@ import {
     UserMenuDropdown 
 } from '../../../../styles/dropdown-menus'
 import { toast } from 'react-toastify';
-import { logoutUser } from '../../../../service/authuser';
+import { logoutUser } from '@store/reducers/auth';
 
 
 export const UserDropdown = () => {
   const navigate = useNavigate();
   const [t] = useTranslation();
   const dispatch = useDispatch();
-  const authentication = useSelector((state) => state.auth.authentication);
-  
+  const userInfo = useSelector((state) => state.auth.user);
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const logOut = async (event) => {
-    event.preventDefault();    
+    event.preventDefault();
     try {
-     const response = await logoutUser();
+      await dispatch(logoutUser());  // Call the logoutUser function
       setDropdownOpen(false);
-      dispatch(setAuthentication(undefined));
-      toast.success('Logout is succeed!');
-      navigate('/login');
-      localStorage.removeItem('authentication');
+      toast.success('Logout successful!');
+      navigate('/login');  // Redirect to login page
     } catch (error) {
-      toast.error(error.response.data.message || 'Failed');
+      toast.error(error.response?.data?.message || 'Logout failed');
     }
-    
   };
 
   const navigateToProfile = (event) => {
@@ -64,7 +60,7 @@ export const UserDropdown = () => {
             height={90}
             rounded
           />
-          <p>rrrrr
+          <p>{userInfo.name}
             <small>
               <span>Member since </span>
               <span>

@@ -1,39 +1,58 @@
-import { useState,useEffect } from 'react';
-
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import  PrivateRoute  from './routes/PrivateRoute';
-import  PublicRoute  from './routes/PublicRoute';
+import PrivateRoute from './routes/PrivateRoute';
+import PublicRoute from './routes/PublicRoute';
 import { Login } from '@app/modules/login/Login';
 import { Main } from '@app/modules/main/Main';
 import { Dashboard } from '@pages/dashboard/Dashboard';
 import { PermissionList } from '@pages/permissions/PermissionList';
 import { RoleList } from '@pages/roles/RoleList';
 import { UserList } from '@pages/users/UserList';
-import { useDispatch } from 'react-redux';
-import { checkSession } from './service/authuser';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkSession, checkTokenExpiration } from '@store/reducers/auth';
 import { Profile } from '@pages/profile/Profile';
+
 function App() {
   const [isAppLoading, setIsAppLoading] = useState(true);
   const dispatch = useDispatch();
-  
-  
-
+  // For token expiration check page refresh then logout
+  // useEffect(() => {
+  //   dispatch(checkTokenExpiration()); // Token expiration check
+  //   dispatch(checkSession()).then(() => {
+  //     setIsAppLoading(false);
+  //   }).catch(() => {
+  //     setIsAppLoading(false);
+  //   });
+  // }, [dispatch]);
+  // auto logout when token expire
   useEffect(() => {
-    checkSession(dispatch,setIsAppLoading);
+    const checkExpirationInterval = setInterval(() => {
+      dispatch(checkTokenExpiration());
+      console.log(1)
+    }, 10000); // Check every 10 seconds
 
-  }, []);
+    dispatch(checkSession()).then(() => {
+      setIsAppLoading(false);
+    }).catch(() => {
+      setIsAppLoading(false);
+    });
+
+    return () => clearInterval(checkExpirationInterval); // Clear interval on component unmount
+  }, [dispatch]);
+
   if (isAppLoading) {
     return <p>Loading</p>;
   }
+
   return (
     <>
       <BrowserRouter>
         <Routes>
-           <Route path="/login" element={<PublicRoute />} >
+          <Route path="/login" element={<PublicRoute />}>
             <Route path="/login" element={<Login />} />
           </Route>
-          <Route path="/" element={<PrivateRoute />}> 
+          <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Main />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
@@ -41,8 +60,7 @@ function App() {
               <Route path="/roles" element={<RoleList />} />
               <Route path="/users" element={<UserList />} />
             </Route>
-          </Route> 
-
+          </Route>
         </Routes>
       </BrowserRouter>
       <ToastContainer
@@ -56,7 +74,7 @@ function App() {
         pauseOnHover
       />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

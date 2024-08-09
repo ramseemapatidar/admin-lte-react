@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { getUserProfile, updateUserProfile } from '../../service/authuser';
-import { useSelector, useDispatch } from 'react-redux';
-import { setAuthentication } from '../../store/reducers/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfile, updateProfile } from '../../store/reducers/auth';
 
 export const Profile = () => {
     const dispatch = useDispatch();
-    const authentication = useSelector((state) => state.auth.authentication);
+    const userInfo = useSelector((state) => state.auth.user);
     const [formData, setFormData] = useState({
-        name: authentication.userInfo.user.name || '',
-        email: authentication.userInfo.user.email || '',
+        name: userInfo.name || '',
+        email: userInfo.email || '',
         file: null,
     });
 
+    // useEffect(() => {
+    //     dispatch(getProfile());
+    // }, [dispatch]);
+
     useEffect(() => {
-        if (authentication?.user) {
+        if (userInfo) {
             setFormData({
-                name: authentication.userInfo.user.name,
-                email: authentication.userInfo.user.email,
+                name: userInfo.name,
+                email: userInfo.email,
                 file: null,
             });
         }
-    }, [authentication]);
+    }, [userInfo]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -48,24 +51,9 @@ export const Profile = () => {
             formDataToSend.append('image', formData.file);
         }
 
-        try {
-            await updateUserProfile(formDataToSend);
-            
-            const currentAuth = JSON.parse(localStorage.getItem('authentication'));
-           
-            if (currentAuth) {
-               
-                currentAuth.userInfo.user.name = formData.name;
-               
-                localStorage.setItem('authentication', JSON.stringify(currentAuth));
+        dispatch(updateProfile(formDataToSend));
+        toast.success('Profile updated successfully!');
 
-                // Update Redux state
-                dispatch(setAuthentication(currentAuth));
-                toast.success('Profile updated successfully!');
-            }
-        } catch (error) {
-            toast.error(error.response?.data?.message || 'Failed to update profile');
-        }
     };
 
     return (
@@ -127,4 +115,3 @@ export const Profile = () => {
         </div>
     );
 };
-

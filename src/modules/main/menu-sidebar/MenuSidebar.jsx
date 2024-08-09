@@ -5,8 +5,7 @@ import { capitalize } from '../../../utils/helpers';
 export const MenuSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const authentication = useSelector((state) => state.auth.authentication);
-console.log('ram',authentication.userInfo.user.name);
+  const userInfo = useSelector((state) => state.auth.user);
   // Determine if the User Management menu should be open based on the current path
   useEffect(() => {
     if (location.pathname.startsWith("/permissions") || location.pathname.startsWith("/roles") || location.pathname.startsWith("/users")) {
@@ -32,7 +31,7 @@ console.log('ram',authentication.userInfo.user.name);
             <img src="https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User Image" />
           </div>
           <div className="info">
-            <a href="#" className="d-block">{ capitalize(authentication.userInfo.user.name)}</a>
+            <a href="#" className="d-block">{ capitalize(userInfo.name)}</a>
           </div>
         </div>
         <nav className="mt-2">
